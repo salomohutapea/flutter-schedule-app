@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1049921605644",
+    "firebase_url": "https://salomohutapea-website.firebaseio.com",
+    "project_id": "salomohutapea-website",
+    "storage_bucket": "salomohutapea-website.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1049921605644:android:7643bac1eac8798faf9e29",
+        "android_client_info": {
+          "package_name": "com.example.schedule_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1049921605644-p51qgga8270gmnpv0jp66daiiad8iql8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDZM35D-XEVWmV9ZBHl-rfocmwJR8zlqYo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1049921605644-p51qgga8270gmnpv0jp66daiiad8iql8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
