@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:schedule_app/services/auth.dart';
 import 'package:schedule_app/shared/constants.dart';
+import 'package:schedule_app/shared/loading.dart';
 
 class Register extends StatefulWidget {
   final Function toggleView;
@@ -10,9 +11,9 @@ class Register extends StatefulWidget {
 }
 
 class _RegisterState extends State<Register> {
-
   final AuthService _auth = AuthService();
   final _formKey = GlobalKey<FormState>();
+  bool loading = false;
 
   // text field state
   String email = '';
@@ -21,18 +22,20 @@ class _RegisterState extends State<Register> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return loading ? Loading() : Scaffold(
       backgroundColor: Colors.blue[50],
       appBar: AppBar(
         backgroundColor: Colors.blue[400],
         elevation: 0.0,
         title: Text('Sign up to Schedule App'),
         actions: <Widget>[
-          FlatButton.icon(icon: Icon(Icons.person),
-          label: Text('Sign In'),
-          onPressed: () {
-            widget.toggleView();
-          },)
+          FlatButton.icon(
+            icon: Icon(Icons.person),
+            label: Text('Sign In'),
+            onPressed: () {
+              widget.toggleView();
+            },
+          )
         ],
       ),
       body: Container(
@@ -54,7 +57,8 @@ class _RegisterState extends State<Register> {
               SizedBox(height: 20.0),
               TextFormField(
                 decoration: textInputDecoration.copyWith(hintText: 'Password'),
-                validator: (val) => val.length < 6 ? 'Enter a password 6+ chars long' : null,
+                validator: (val) =>
+                    val.length < 6 ? 'Enter a password 6+ chars long' : null,
                 obscureText: true,
                 onChanged: (val) {
                   setState(() {
@@ -71,10 +75,17 @@ class _RegisterState extends State<Register> {
                   style: TextStyle(color: Colors.white),
                 ),
                 onPressed: () async {
-                  if(_formKey.currentState.validate()) {
-                    dynamic result = await _auth.registerwithEmailAndPassword(email, password);
+                  if (_formKey.currentState.validate()) {
+                    setState(() {
+                      loading = true;
+                    });
+                    dynamic result = await _auth.registerwithEmailAndPassword(
+                        email, password);
                     if (result == null) {
-                      setState(() => error = 'Please enter a valid email');
+                      setState(() {
+                        error = 'Please enter a valid email';
+                        loading = false;
+                      });
                     }
                   }
                 },
